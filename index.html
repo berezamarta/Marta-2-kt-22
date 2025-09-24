@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Linux — короткий огляд</title>
+  <style>
+    /* Яскравий, сучасний стиль */
+    :root{
+      --bg:#0f1724; --card:#0b1220; --accent:#06b6d4; --muted:#94a3b8; --glass: rgba(255,255,255,0.04);
+      --radius:16px; --pad:18px;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Inter,Segoe UI,Roboto,Arial; margin:0; background:linear-gradient(180deg,#071026 0%, #071827 60%); color:#e6eef6; line-height:1.5}
+    header{padding:36px 18px 12px; text-align:center}
+    h1{margin:0; font-size:2.1rem; letter-spacing:0.2px}
+    .container{max-width:980px;margin:20px auto;padding:16px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:var(--radius); padding:var(--pad); box-shadow:0 6px 30px rgba(2,6,23,0.6); margin-bottom:18px}
+    .grid{display:grid; grid-template-columns:1fr; gap:14px}
+    @media(min-width:900px){ .grid{grid-template-columns: 1fr 360px} }
+    ul{margin:8px 0 0 1.1rem}
+    pre{background:rgba(2,6,23,0.6); padding:12px; border-radius:10px; overflow:auto}
+    code{font-family:SFMono-Regular,Menlo,Monaco,Roboto Mono,monospace; font-size:0.95rem}
+    .button{display:inline-block;padding:10px 14px;border-radius:12px;background:var(--accent); color:#042027; text-decoration:none;font-weight:600}
+    footer{opacity:0.8; font-size:0.9rem; text-align:center; margin:18px 0}
+    .muted{color:var(--muted)}
+    .sources a{color:var(--accent); text-decoration:none}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Linux — короткий огляд</h1>
+    <p class="muted">Односторінкова презентація теми з прикладами команд, Bash-скриптом і джерелами</p>
+    <p><strong>Автор: Береза Марта</strong></p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>1. Що таке GNU/Linux?</h2>
+      <p>
+        GNU/Linux — це сімейство операційних систем, заснованих на ядрі <em>Linux</em> та інструментах проєкту GNU і численних відкритих програм. Це вільне (open-source) середовище, яке використовується на серверах, десктопах, вбудованих пристроях та суперкомп’ютерах.
+      </p>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <h2>2. Популярні дистрибутиви</h2>
+        <ul>
+          <li>Ubuntu — дружній для користувача десктоп/сервер</li>
+          <li>Debian — стабільність і пакетна інфраструктура</li>
+          <li>Fedora — сучасні технології, швидкі оновлення</li>
+          <li>CentOS Stream / AlmaLinux / Rocky Linux — серверні заміни RHEL</li>
+          <li>Arch Linux — мінімалізм і контроль (rolling-release)</li>
+          <li>openSUSE — потужні адмін-інструменти (yaST)</li>
+        </ul>
+
+        <h3 style="margin-top:14px">3. Приклади команд (CLI)</h3>
+        <p class="muted">Короткий список команд, що часто використовуються в терміналі:</p>
+        <pre><code>pwd   # показати поточний робочий каталог
+ls    # список файлів і папок
+cd    # змінити каталог
+echo  # вивести текст
+mkdir # створити папку
+touch # створити порожній файл
+cp    # скопіювати файл або папку
+mv    # перемістити або перейменувати
+rm    # видалити файл (будьте уважні!)
+history # показати історію команд</code></pre>
+      </section>
+
+      <aside class="card">
+        <h2>4. Bash-скрипт: імітація авторизації</h2>
+        <p class="muted">Цей простий скрипт демонструє перевірку імені користувача та пароля в текстовому режимі. Це навчальна імітація — не використовуйте для реальної аутентифікації.</p>
+        <pre><code># Збережіть як auth.sh і зробіть виконуваним (chmod +x auth.sh)
+#!/usr/bin/env bash
+
+# Прості "збережені" облікові дані (для демонстрації)
+SAVED_USER="student"
+SAVED_PASS="linux123"
+
+read -p "Username: " USER
+# -s приховує вивід при введенні пароля
+read -s -p "Password: " PASS
+echo
+
+if [[ "$USER" == "$SAVED_USER" && "$PASS" == "$SAVED_PASS" ]]; then
+  echo "Authentication successful. Welcome, $USER!"
+  # тут можна показати меню або інші дії
+else
+  echo "Authentication failed. Goodbye."
+  exit 1
+fi</code></pre>
+        <p style="margin-top:8px"><a class="button" id="downloadBtn">Завантажити auth.sh</a></p>
+      </aside>
+    </div>
+
+    <section class="card">
+      <h2>5. Джерела інформації</h2>
+      <ul class="sources">
+        <li><a href="https://www.kernel.org" target="_blank" rel="noopener">kernel.org — офіційний сайт ядра Linux</a></li>
+        <li><a href="https://www.gnu.org" target="_blank" rel="noopener">gnu.org — проєкт GNU</a></li>
+        <li><a href="https://ubuntu.com" target="_blank" rel="noopener">ubuntu.com — документація Ubuntu</a></li>
+        <li><a href="https://www.debian.org" target="_blank" rel="noopener">debian.org — офіційний сайт Debian</a></li>
+      </ul>
+    </section>
+
+   
+  </main>
+
+  <script>
+    // Генеруємо файл auth.sh для завантаження прямо зі сторінки
+    const bashContent = `#!/usr/bin/env bash
+
+# Прості "збережені" облікові дані (для демонстрації)
+SAVED_USER="student"
+SAVED_PASS="linux123"
+
+read -p "Username: " USER
+read -s -p "Password: " PASS
+echo
+
+if [[ "${USER}" == "${SAVED_USER}" && "${PASS}" == "${SAVED_PASS}" ]]; then
+  echo "Authentication successful. Welcome, ${USER}!"
+else
+  echo "Authentication failed. Goodbye."
+  exit 1
+fi\n`;
+
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const blob = new Blob([bashContent], {type: 'text/x-sh'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'auth.sh'; document.body.appendChild(a);
+      a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
